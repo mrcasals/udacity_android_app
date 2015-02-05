@@ -46,13 +46,13 @@ public class ForecastFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         String[] forecasts = {"Today - Sunny - 88/64",
-                "Today - Sunny - 88/64",
-                "Tomorrow - Sunny - 88/64",
+                "Tomorrow - Sunny Again - 88/64",
                 "Monday - Sunny - 88/64",
                 "Tuesday - Sunny - 88/64",
                 "Wednesday - Sunny - 88/64",
                 "Thursday - Sunny - 88/64",
-                "Friday - Sunny - 88/64"
+                "Friday - Sunny - 88/64",
+                "Saturday - Cloudy - 88/64"
         };
 
         List<String> weekForecast = new ArrayList<String>(
@@ -270,5 +270,14 @@ public class ForecastFragment extends Fragment {
             return resultStrs;
         }
 
+        @Override
+        protected void onPostExecute(String[] forecast) {
+            if(forecast != null) {
+                mForecastAdapter.clear();
+                for(String day : forecast) {
+                    mForecastAdapter.add(day);
+                }
+            }
+        }
     }
 }
