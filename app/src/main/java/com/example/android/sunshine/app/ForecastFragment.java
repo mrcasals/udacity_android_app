@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -48,6 +50,8 @@ public class ForecastFragment extends Fragment {
                 Arrays.asList(forecasts)
         );
 
+        setHasOptionsMenu(true);
+
         mForecastAdapter = new ArrayAdapter<String>(getActivity(),
                 R.layout.list_item_forecast, R.id.list_item_forecast_textview, weekForecast);
 
@@ -55,6 +59,12 @@ public class ForecastFragment extends Fragment {
         listViewForecast.setAdapter(mForecastAdapter);
 
         return rootView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        inflater.inflate(R.menu.forecastfragment, menu);
     }
 
     public class FetchWeatherTask extends AsyncTask<Void, Void, Void> {
