@@ -1,5 +1,6 @@
 package com.example.android.sunshine.app;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -10,12 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.TextView;
 
 
 public class DetailActivity extends ActionBarActivity {
 
-    public static final String EXTRA_FORECAST_POSITION =
-            "com.example.android.sunshine.app.EXTRA_FORECAST_POSITION";
+    public static final String EXTRA_FORECAST =
+            "com.example.android.sunshine.app.EXTRA_FORECAST";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,13 @@ public class DetailActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+            Intent intent = getActivity().getIntent();
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+            if(intent != null && intent.hasExtra(DetailActivity.EXTRA_FORECAST)) {
+                String forecastStr = intent.getStringExtra(DetailActivity.EXTRA_FORECAST);
+                ((TextView) rootView.findViewById(R.id.detail_text))
+                        .setText(forecastStr);
+            }
             return rootView;
         }
     }
