@@ -90,12 +90,16 @@ public class ForecastFragment extends Fragment {
 
     private void updateWeather() {
         FetchWeatherTask weatherTask = new FetchWeatherTask();
+
+        weatherTask.execute(currentLocation());
+    }
+
+    private String currentLocation() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String location = prefs.getString(
+        return prefs.getString(
                 getString(R.string.pref_location_key),
                 getString(R.string.pref_location_default)
         );
-        weatherTask.execute(location);
     }
 
     @Override
